@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecBolivia-Ecomerce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg:      #0e0e0f;
+            --surface: #161618;
+            --border:  #252528;
+            --muted:   #3a3a3e;
+            --text:    #e8e8ea;
+            --sub:     #7a7a82;
+            --red:     #e05252;
+            --amber:   #d4914a;
+            --green:   #4aad7a;
+            --blue:    #5a9ed4;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* GRAIN */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(14,14,15,0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 48px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            text-decoration: none;
+            margin-right: 12px;
+        }
+        .nav-logo span { color: var(--sub); }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-links a {
+            font-size: 13.5px;
+            color: var(--sub);
+            text-decoration: none;
+            transition: color .15s;
+        }
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 16px;
+            border-radius: 7px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--sub);
+            cursor: pointer;
+            transition: all .18s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn:hover { border-color: var(--muted); color: var(--text); background: var(--border); }
+
+        .btn-primary {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+        .btn-primary:hover { background: #c8c8ca; border-color: #c8c8ca; color: var(--bg); }
+
+        .cart-btn {
+            position: relative;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 16px;
+            height: 16px;
+            background: var(--red);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 88vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 80px 48px;
+            gap: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(90,158,212,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11.5px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--blue);
+            background: rgba(90,158,212,0.1);
+            padding: 5px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(90,158,212,0.2);
+            margin-bottom: 24px;
+        }
+        .hero-eyebrow::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--blue);
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(42px, 5vw, 68px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.02;
+            margin-bottom: 22px;
+        }
+
+        .hero-title .accent { color: var(--blue); }
+        .hero-title .dim    { color: var(--sub);  }
+
+        .hero-desc {
+            font-size: 15.5px;
+            color: var(--sub);
+            line-height: 1.7;
+            max-width: 460px;
+            margin-bottom: 36px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-lg {
+            font-size: 14px;
+            padding: 10px 22px;
+            border-radius: 8px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 52px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+        }
+
+        .hstat-val {
+            font-family: 'Syne', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            color: var(--text);
+        }
+        .hstat-label {
+            font-size: 12px;
+            color: var(--sub);
+            margin-top: 2px;
+        }
+
+        /* Hero visual */
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            width: 100%;
+            max-width: 380px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .hcard-img {
+            width: 100%;
+            height: 200px;
+            background: var(--bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hcard-img svg {
+            width: 100px;
+            opacity: 0.8;
+        }
+
+        .hcard-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--green);
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+        }
+
+        .hcard-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            margin-bottom: 4px;
+        }
+
+        .hcard-sub {
+            font-size: 12.5px;
+            color: var(--sub);
+            margin-bottom: 16px;
+        }
+
+        .hcard-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hcard-price {
+            font-family: 'Syne', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text);
+        }
+        .hcard-price small {
+            font-size: 13px;
+            color: var(--sub);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            margin-left: 2px;
+        }
+
+        .floating-tag {
+            position: absolute;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .float-1 {
+            top: 20px;
+            right: -24px;
+            color: var(--green);
+        }
+        .float-2 {
+            bottom: 30px;
+            left: -28px;
+            color: var(--amber);
+        }
+
+        /* ─── STRIP ─── */
+        .strip {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 48px;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            overflow: hidden;
+        }
+
+        .strip-label {
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--muted);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .brands {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--muted);
+            letter-spacing: -0.3px;
+            white-space: nowrap;
+            transition: color .2s;
+        }
+        .brand:hover { color: var(--sub); }
+
+        /* ─── CATEGORIES ─── */
+        .section {
+            padding: 80px 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 36px;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .section-sub {
+            font-size: 13.5px;
+            color: var(--sub);
+            margin-top: 4px;
+        }
+
+        .cats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .cat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 22px;
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .cat-card:hover {
+            border-color: var(--muted);
+            transform: translateY(-2px);
+        }
+
+        .cat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+        }
+
+        .cat-card.blue::after  { background: var(--blue);  }
+        .cat-card.green::after { background: var(--green); }
+        .cat-card.amber::after { background: var(--amber); }
+        .cat-card.red::after   { background: var(--red);   }
+
+        .cat-icon {
+            font-size: 30px;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .cat-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .cat-count {
+            font-size: 12px;
+            color: var(--sub);
+        }
+
+        /* ─── PRODUCTS ─── */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .product-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all .2s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            border-color: var(--muted);
+            transform: translateY(-3px);
+        }
+
+        .product-card.featured {
+            grid-column: span 2;
+        }
+
+        .product-img {
+            background: var(--bg);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card.featured .product-img { height: 260px; }
+
+        .product-img-icon {
+            font-size: 60px;
+            opacity: 0.5;
+        }
+
+        .prod-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+            letter-spacing: 0.4px;
+        }
+
+        .prod-tag.new    { background: rgba(90,158,212,.15);  color: var(--blue);  border: 1px solid rgba(90,158,212,.25); }
+        .prod-tag.sale   { background: rgba(224,82,82,.15);   color: var(--red);   border: 1px solid rgba(224,82,82,.25); }
+        .prod-tag.hot    { background: rgba(212,145,74,.15);  color: var(--amber); border: 1px solid rgba(212,145,74,.25); }
+        .prod-tag.stock  { background: rgba(74,173,122,.15);  color: var(--green); border: 1px solid rgba(74,173,122,.25); }
+
+        .product-body {
+            padding: 18px 20px;
+        }
+
+        .product-brand {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        .product-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: var(--text);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .product-specs {
+            font-size: 12px;
+            color: var(--sub);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .product-price-old {
+            font-size: 12px;
+            color: var(--muted);
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        .product-stars {
+            font-size: 12px;
+            color: var(--amber);
+            letter-spacing: 1px;
+        }
+
+        .add-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .18s;
+            font-weight: 300;
+        }
+        .add-btn:hover { background: #c8c8ca; transform: scale(1.05); }
+
+        /* ─── BANNER ─── */
+        .banner {
+            margin: 0 48px 80px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 52px 60px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--blue), var(--green));
+        }
+
+        .banner-eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .banner-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+
+        .banner-sub {
+            font-size: 14px;
+            color: var(--sub);
+            line-height: 1.6;
+            max-width: 460px;
+        }
+
+        .countdown {
+            display: flex;
+            gap: 16px;
+        }
+
+        .cd-box {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            text-align: center;
+            min-width: 64px;
+        }
+
+        .cd-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text);
+        }
+
+        .cd-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        /* ─── FEATURES ─── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .feature {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 20px;
+        }
+
+        .feat-icon {
+            font-size: 22px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .feat-title {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .feat-sub {
+            font-size: 12px;
+            color: var(--sub);
+            line-height: 1.5;
+        }
+
+        /* ─── TESTIMONIALS ─── */
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .testi {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+        }
+
+        .testi-stars {
+            color: var(--amber);
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .testi-text {
+            font-size: 13.5px;
+            color: var(--sub);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            font-style: italic;
+        }
+
+        .testi-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .testi-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--sub);
+            flex-shrink: 0;
+        }
+
+        .testi-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .testi-location {
+            font-size: 11.5px;
+            color: var(--muted);
+        }
+
+        /* ─── NEWSLETTER ─── */
+        .newsletter {
+            margin: 0 48px 80px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .news-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .news-sub {
+            font-size: 14px;
+            color: var(--sub);
+            margin-bottom: 32px;
+        }
+
+        .news-form {
+            display: flex;
+            gap: 10px;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .news-input {
+            flex: 1;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 16px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13.5px;
+            color: var(--text);
+            outline: none;
+            transition: border-color .18s;
+        }
+        .news-input::placeholder { color: var(--muted); }
+        .news-input:focus { border-color: var(--muted); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 60px 48px 36px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand .nav-logo {
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .footer-desc {
+            font-size: 13px;
+            color: var(--sub);
+            line-height: 1.7;
+            max-width: 260px;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .social-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 7px;
+            background: var(--border);
+            border: 1px solid var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: var(--sub);
+            cursor: pointer;
+            transition: all .15s;
+            text-decoration: none;
+        }
+        .social-btn:hover { background: var(--muted); color: var(--text); }
+
+        .footer-col-title {
+            font-size: 11.5px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 18px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--sub);
+            text-decoration: none;
+            transition: color .15s;
+        }
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-copy {
+            font-size: 12.5px;
+            color: var(--muted);
+        }
+
+        .footer-badges {
+            display: flex;
+            gap: 8px;
+        }
+
+        .pay-badge {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        /* ─── WHATSAPP FLOTANTE ─── */
+        .wa-float {
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wa-btn {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #25D366;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+            transition: transform .2s, box-shadow .2s;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .wa-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+        }
+
+        .wa-btn svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+
+        .wa-tooltip {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 12.5px;
+            color: var(--text);
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity .2s, transform .2s;
+            pointer-events: none;
+        }
+
+        .wa-float:hover .wa-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .wa-tooltip strong { color: #25D366; font-weight: 600; }
+
+        /* ─── SCROLLBAR ─── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 10px; }
+
+        /* ─── ANIMATIONS ─── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp .5s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in:nth-child(1) { animation-delay: .05s; }
+        .fade-in:nth-child(2) { animation-delay: .12s; }
+        .fade-in:nth-child(3) { animation-delay: .19s; }
+        .fade-in:nth-child(4) { animation-delay: .26s; }
+
+        /* ─── TOAST ─── */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 13.5px;
+            color: var(--text);
+            z-index: 9000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(80px);
+            opacity: 0;
+            transition: all .3s ease;
+            pointer-events: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        .toast-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+    <a class="nav-logo" href="#">TEC<span>Bolivia</span></a>
+    <ul class="nav-links">
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#categorias">Categorías</a></li>
+        <li><a href="#ofertas">Ofertas</a></li>
+        <li><a href="#">Marcas</a></li>
+        <li><a href="#">Soporte</a></li>
+    </ul>
+    <div class="nav-right">
+        <button class="btn" onclick="showToast('Función próximamente disponible')">Iniciar sesión</button>
+        <button class="btn btn-primary cart-btn" onclick="showToast('Tu carrito está vacío')">
+            🛒 Carrito
+            <span class="cart-badge" id="cartCount">0</span>
+        </button>
+    </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+    <div>
+        <h1 class="hero-title">
+            El futuro<br>
+            <span class="accent">tecnológico</span><br>
+            <span class="dim">está aquí.</span>
+        </h1>
+        <p class="hero-desc">
+            Encuentra los últimos equipos, smartphones, laptops y accesorios tecnológicos con la mejor garantía y servicio técnico especializado de Bolivia.
+        </p>
+        <div class="hero-actions">
+            <a href="#productos" class="btn btn-primary btn-lg">Ver productos →</a>
+            <a href="#ofertas" class="btn btn-lg">Ver ofertas</a>
+        </div>
+        <div class="hero-stats">
+            <div>
+                <div class="hstat-val">+4,200</div>
+                <div class="hstat-label">Productos disponibles</div>
+            </div>
+            <div>
+                <div class="hstat-val">12,000+</div>
+                <div class="hstat-label">Clientes satisfechos</div>
+            </div>
+            <div>
+                <div class="hstat-val">72h</div>
+                <div class="hstat-label">Entrega en Bolivia</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="floating-tag float-1">✓ Stock disponible</div>
+        <div class="hero-card">
+            <div class="hcard-img">
+                <span class="hcard-badge">NUEVO</span>
+                <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="8" width="100" height="54" rx="6" fill="#252528" stroke="#3a3a3e"/>
+                    <rect x="14" y="12" width="92" height="46" rx="4" fill="#161618"/>
+                    <rect x="18" y="16" width="84" height="38" rx="3" fill="#0a0a0b"/>
+                    <rect x="22" y="20" width="40" height="5" rx="2" fill="#3a3a3e"/>
+                    <rect x="22" y="28" width="28" height="3" rx="1.5" fill="#252528"/>
+                    <rect x="22" y="34" width="60" height="3" rx="1.5" fill="#252528"/>
+                    <rect x="22" y="40" width="50" height="3" rx="1.5" fill="#252528"/>
+                    <rect x="66" y="20" width="28" height="20" rx="3" fill="#1a2a3a"/>
+                    <rect x="40" y="62" width="40" height="4" rx="2" fill="#252528"/>
+                    <rect x="30" y="66" width="60" height="6" rx="3" fill="#1e1e20"/>
+                    <circle cx="92" cy="26" r="8" fill="#5a9ed4" opacity="0.2"/>
+                    <circle cx="92" cy="26" r="4" fill="#5a9ed4" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="hcard-name">UltraBook Pro X1</div>
+            <div class="hcard-sub">Intel Core i9 · 32GB RAM · 2TB SSD</div>
+            <div class="hcard-bottom">
+                <div>
+                    <div class="hcard-price">Bs. 8,490 <small>BOB</small></div>
+                </div>
+                <button class="btn btn-primary" onclick="addToCart('UltraBook Pro X1')">Agregar</button>
+            </div>
+        </div>
+        <div class="floating-tag float-2">⭐ 4.9 · 238 reseñas</div>
+    </div>
+</section>
+
+<!-- ─── BRAND STRIP ─── -->
+<div class="strip">
+    <span class="strip-label">Marcas oficiales</span>
+    <div class="brands">
+        <span class="brand">SAMSUNG</span>
+        <span class="brand">APPLE</span>
+        <span class="brand">LENOVO</span>
+        <span class="brand">ASUS</span>
+        <span class="brand">SONY</span>
+        <span class="brand">LG</span>
+        <span class="brand">HP</span>
+        <span class="brand">XIAOMI</span>
+    </div>
+</div>
+
+<!-- ─── CATEGORÍAS ─── -->
+<section class="section" id="categorias">
+    <div class="section-header">
+        <div>
+            <div class="section-title">Categorías</div>
+            <div class="section-sub">Encuentra exactamente lo que buscas</div>
+        </div>
+        <a href="#" class="btn">Ver todas →</a>
+    </div>
+    <div class="cats-grid">
+        <a href="#" class="cat-card blue fade-in">
+            <span class="cat-icon">💻</span>
+            <div class="cat-name">Laptops & PCs</div>
+            <div class="cat-count">348 productos</div>
+        </a>
+        <a href="#" class="cat-card green fade-in">
+            <span class="cat-icon">📱</span>
+            <div class="cat-name">Smartphones</div>
+            <div class="cat-count">512 productos</div>
+        </a>
+        <a href="#" class="cat-card amber fade-in">
+            <span class="cat-icon">🎧</span>
+            <div class="cat-name">Audio & Gaming</div>
+            <div class="cat-count">276 productos</div>
+        </a>
+        <a href="#" class="cat-card red fade-in">
+            <span class="cat-icon">📷</span>
+            <div class="cat-name">Fotografía</div>
+            <div class="cat-count">194 productos</div>
+        </a>
+    </div>
+</section>
+
+<!-- ─── PRODUCTOS ─── -->
+<section class="section" id="productos" style="padding-top: 0;">
+    <div class="section-header">
+        <div>
+            <div class="section-title">Productos destacados</div>
+            <div class="section-sub">Lo más vendido esta semana</div>
+        </div>
+        <a href="#" class="btn">Ver catálogo →</a>
+    </div>
+    <div class="products-grid">
+
+        <!-- Featured -->
+        <div class="product-card featured">
+            <div class="product-img">
+                <span class="prod-tag hot">🔥 Más vendido</span>
+                <span class="product-img-icon">📱</span>
+            </div>
+            <div class="product-body">
+                <div class="product-brand">Samsung</div>
+                <div class="product-name">Galaxy S25 Ultra 5G</div>
+                <div class="product-specs">6.8" AMOLED · 200MP · 5000mAh · 12GB RAM · 256GB</div>
+                <div class="product-footer">
+                    <div>
+                        <span class="product-price">Bs. 5,890</span>
+                        <span class="product-price-old">Bs. 6,500</span>
+                        <div class="product-stars">★★★★★</div>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Galaxy S25 Ultra')">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <span class="prod-tag new">Nuevo</span>
+                <span class="product-img-icon">🎧</span>
+            </div>
+            <div class="product-body">
+                <div class="product-brand">Sony</div>
+                <div class="product-name">WH-1000XM6</div>
+                <div class="product-specs">ANC · 40h batería · Hi-Res Audio</div>
+                <div class="product-footer">
+                    <div>
+                        <span class="product-price">Bs. 1,490</span>
+                        <div class="product-stars">★★★★★</div>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('WH-1000XM6')">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <span class="prod-tag sale">-20%</span>
+                <span class="product-img-icon">⌚</span>
+            </div>
+            <div class="product-body">
+                <div class="product-brand">Apple</div>
+                <div class="product-name">Watch Ultra 3</div>
+                <div class="product-specs">49mm · Titanio · GPS dual · 72h batería</div>
+                <div class="product-footer">
+                    <div>
+                        <span class="product-price">Bs. 4,290</span>
+                        <span class="product-price-old">Bs. 5,350</span>
+                        <div class="product-stars">★★★★☆</div>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('Watch Ultra 3')">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <span class="prod-tag stock">En stock</span>
+                <span class="product-img-icon">🖥️</span>
+            </div>
+            <div class="product-body">
+                <div class="product-brand">LG</div>
+                <div class="product-name">UltraGear 27" 4K</div>
+                <div class="product-specs">144Hz · 1ms · IPS · HDR600</div>
+                <div class="product-footer">
+                    <div>
+                        <span class="product-price">Bs. 2,890</span>
+                        <div class="product-stars">★★★★★</div>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('LG UltraGear 27')">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img">
+                <span class="prod-tag new">Nuevo</span>
+                <span class="product-img-icon">💻</span>
+            </div>
+            <div class="product-body">
+                <div class="product-brand">ASUS</div>
+                <div class="product-name">ROG Zephyrus G16</div>
+                <div class="product-specs">RTX 4080 · i9-14900H · 32GB · 1TB</div>
+                <div class="product-footer">
+                    <div>
+                        <span class="product-price">Bs. 9,990</span>
+                        <div class="product-stars">★★★★★</div>
+                    </div>
+                    <button class="add-btn" onclick="addToCart('ROG Zephyrus G16')">+</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ─── BANNER OFERTA ─── -->
+<div class="banner" id="ofertas">
+    <div>
+        <div class="banner-eyebrow">⚡ Oferta del día</div>
+        <div class="banner-title">Hasta 35% de descuento<br>en laptops seleccionadas</div>
+        <div class="banner-sub">Solo por tiempo limitado. Aplica en modelos HP, Lenovo y Dell con garantía extendida incluida.</div>
+        <div style="margin-top: 24px; display: flex; gap: 10px;">
+            <button class="btn btn-primary btn-lg" onclick="showToast('Redirigiendo a ofertas…')">Ver ofertas →</button>
+            <button class="btn btn-lg" onclick="showToast('Función próximamente')">Suscribirme a alertas</button>
+        </div>
+    </div>
+    <div class="countdown" id="countdown">
+        <div class="cd-box"><div class="cd-num" id="cdH">08</div><div class="cd-label">Horas</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdM">24</div><div class="cd-label">Minutos</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdS">00</div><div class="cd-label">Segundos</div></div>
+    </div>
+</div>
+
+<!-- ─── FEATURES ─── -->
+<section class="section" style="padding-top: 0;">
+    <div class="features-grid">
+        <div class="feature">
+            <span class="feat-icon">🚚</span>
+            <div class="feat-title">Envío a toda Bolivia</div>
+            <div class="feat-sub">Entrega en 24-72h a las principales ciudades del país.</div>
+        </div>
+        <div class="feature">
+            <span class="feat-icon">🛡️</span>
+            <div class="feat-title">Garantía oficial</div>
+            <div class="feat-sub">Todos los productos cuentan con garantía del fabricante.</div>
+        </div>
+        <div class="feature">
+            <span class="feat-icon">🔄</span>
+            <div class="feat-title">Devoluciones fáciles</div>
+            <div class="feat-sub">30 días para devolver sin preguntas si no estás satisfecho.</div>
+        </div>
+        <div class="feature">
+            <span class="feat-icon">💬</span>
+            <div class="feat-title">Soporte 24/7</div>
+            <div class="feat-sub">Técnicos certificados disponibles todos los días del año.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── TESTIMONIOS ─── -->
+<section class="section" style="padding-top: 0;">
+    <div class="section-header">
+        <div>
+            <div class="section-title">Lo que dicen nuestros clientes</div>
+            <div class="section-sub">Más de 12,000 bolivianos confían en TecBolivia</div>
+        </div>
+    </div>
+    <div class="testi-grid">
+        <div class="testi">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-text">"Recibí mi laptop en menos de 24 horas en Cochabamba. La garantía y el servicio post-venta son excelentes. Definitivamente mi tienda tech de referencia."</div>
+            <div class="testi-author">
+                <div class="testi-avatar">MC</div>
+                <div>
+                    <div class="testi-name">Marco Castro</div>
+                    <div class="testi-location">Cochabamba · Laptop HP Pavilion</div>
+                </div>
+            </div>
+        </div>
+        <div class="testi">
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-text">"Compré el Samsung Galaxy S25 y fue una experiencia increíble. Precio justo, producto 100% original y llegó perfectamente embalado."</div>
+            <div class="testi-author">
+                <div class="testi-avatar">AS</div>
+                <div>
+                    <div class="testi-name">Andrea Salinas</div>
+                    <div class="testi-location">La Paz · Samsung Galaxy S25</div>
+                </div>
+            </div>
+        </div>
+        <div class="testi">
+            <div class="testi-stars">★★★★☆</div>
+            <div class="testi-text">"El soporte técnico me ayudó a configurar todo mi setup gamer. Muy atentos y conocen perfectamente los productos que venden."</div>
+            <div class="testi-author">
+                <div class="testi-avatar">RV</div>
+                <div>
+                    <div class="testi-name">Roberto Vargas</div>
+                    <div class="testi-location">Santa Cruz · ASUS ROG</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── NEWSLETTER ─── -->
+<div class="newsletter">
+    <div class="news-title">Sé el primero en conocer las ofertas</div>
+    <div class="news-sub">Recibe notificaciones de descuentos exclusivos, lanzamientos y restock directamente en tu correo.</div>
+    <div class="news-form">
+        <input type="email" class="news-input" placeholder="tu@correo.com" id="emailInput">
+        <button class="btn btn-primary btn-lg" onclick="subscribeNewsletter()">Suscribirme →</button>
+    </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a class="nav-logo" href="#">TEC<span>Bolivia</span></a>
+            <div class="footer-desc">
+                La tienda de tecnología más confiable de Bolivia. Productos originales, garantía real y soporte técnico especializado desde 2018.
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-btn" onclick="showToast('Facebook TecBolivia')">f</a>
+                <a href="#" class="social-btn" onclick="showToast('Instagram @tecbolivia')">in</a>
+                <a href="#" class="social-btn" onclick="showToast('WhatsApp TecBolivia')">w</a>
+                <a href="#" class="social-btn" onclick="showToast('TikTok @tecbolivia')">tt</a>
+            </div>
+        </div>
+        <div>
+            <div class="footer-col-title">Tienda</div>
+            <ul class="footer-links">
+                <li><a href="#">Laptops & PCs</a></li>
+                <li><a href="#">Smartphones</a></li>
+                <li><a href="#">Audio & Gaming</a></li>
+                <li><a href="#">Fotografía</a></li>
+                <li><a href="#">Accesorios</a></li>
+                <li><a href="#">Outlet</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Soporte</div>
+            <ul class="footer-links">
+                <li><a href="#">Centro de ayuda</a></li>
+                <li><a href="#">Seguimiento de pedido</a></li>
+                <li><a href="#">Garantías</a></li>
+                <li><a href="#">Devoluciones</a></li>
+                <li><a href="#">Técnicos certificados</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-col-title">Empresa</div>
+            <ul class="footer-links">
+                <li><a href="#">Sobre TecBolivia</a></li>
+                <li><a href="#">Trabaja con nosotros</a></li>
+                <li><a href="#">Distribuidores</a></li>
+                <li><a href="#">Política de privacidad</a></li>
+                <li><a href="#">Términos y condiciones</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-copy">© 2025 TecBolivia. Todos los derechos reservados. Cochabamba, Bolivia.</div>
+        <div class="footer-badges">
+            <span class="pay-badge">Visa</span>
+            <span class="pay-badge">Mastercard</span>
+            <span class="pay-badge">QR BCP</span>
+            <span class="pay-badge">Tigo Money</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOTANTE ─── -->
+<div class="wa-float">
+    <a class="wa-btn"
+       href="https://wa.me/15551625988"
+       target="_blank"
+       rel="noopener noreferrer"
+       title="Chatea con nosotros por WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+    <div class="wa-tooltip">
+        <strong>¿Necesitas ayuda?</strong><br>
+        Chatea con nosotros
+    </div>
+</div>
+
+<!-- ─── TOAST ─── -->
+<div class="toast" id="toast">
+    <div class="toast-dot"></div>
+    <span id="toastMsg">Producto agregado</span>
+</div>
+
+<script>
+    let cartItems = 0;
+
+    function addToCart(name) {
+        cartItems++;
+        document.getElementById('cartCount').textContent = cartItems;
+        showToast(`"${name}" agregado al carrito`);
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastMsg').textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    function subscribeNewsletter() {
+        const email = document.getElementById('emailInput').value.trim();
+        if (!email || !email.includes('@')) {
+            document.getElementById('emailInput').style.borderColor = 'var(--red)';
+            return;
+        }
+        document.getElementById('emailInput').style.borderColor = '';
+        document.getElementById('emailInput').value = '';
+        showToast('¡Suscrito correctamente! Gracias.');
+    }
+
+    // Countdown timer
+    function startCountdown() {
+        let h = 8, m = 24, s = 0;
+        setInterval(() => {
+            s--;
+            if (s < 0) { s = 59; m--; }
+            if (m < 0) { m = 59; h--; }
+            if (h < 0) { h = 0; m = 0; s = 0; }
+            document.getElementById('cdH').textContent = String(h).padStart(2,'0');
+            document.getElementById('cdM').textContent = String(m).padStart(2,'0');
+            document.getElementById('cdS').textContent = String(s).padStart(2,'0');
+        }, 1000);
+    }
+
+    startCountdown();
+</script>
+</body>
+</html>
