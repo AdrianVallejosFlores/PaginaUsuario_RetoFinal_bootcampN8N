@@ -21,7 +21,6 @@
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -31,7 +30,6 @@
             overflow-x: hidden;
         }
 
-        /* GRAIN */
         body::before {
             content: '';
             position: fixed;
@@ -44,936 +42,297 @@
 
         /* ─── NAV ─── */
         nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(14,14,15,0.85);
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(14,14,15,0.88);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            padding: 0 48px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
+            padding: 0 48px; height: 60px;
+            display: flex; align-items: center; gap: 40px;
         }
-
         .nav-logo {
             font-family: 'Syne', sans-serif;
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--text);
-            text-decoration: none;
-            margin-right: 12px;
+            font-size: 18px; font-weight: 800; letter-spacing: -0.5px;
+            color: var(--text); text-decoration: none; margin-right: 12px; white-space: nowrap;
         }
         .nav-logo span { color: var(--sub); }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            list-style: none;
-            flex: 1;
-        }
-
-        .nav-links a {
-            font-size: 13.5px;
-            color: var(--sub);
-            text-decoration: none;
-            transition: color .15s;
-        }
+        .nav-links { display: flex; gap: 28px; list-style: none; flex: 1; }
+        .nav-links a { font-size: 13.5px; color: var(--sub); text-decoration: none; transition: color .15s; white-space: nowrap; }
         .nav-links a:hover { color: var(--text); }
-
-        .nav-right {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .nav-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 
         .btn {
             font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            padding: 7px 16px;
-            border-radius: 7px;
+            font-size: 13px; font-weight: 500;
+            padding: 7px 16px; border-radius: 7px;
             border: 1px solid var(--border);
-            background: transparent;
-            color: var(--sub);
-            cursor: pointer;
-            transition: all .18s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
+            background: transparent; color: var(--sub);
+            cursor: pointer; transition: all .18s;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
         }
         .btn:hover { border-color: var(--muted); color: var(--text); background: var(--border); }
-
-        .btn-primary {
-            background: var(--text);
-            color: var(--bg);
-            border-color: var(--text);
-        }
+        .btn-primary { background: var(--text); color: var(--bg); border-color: var(--text); }
         .btn-primary:hover { background: #c8c8ca; border-color: #c8c8ca; color: var(--bg); }
+        .btn-lg { font-size: 14px; padding: 10px 22px; border-radius: 8px; }
 
-        .cart-btn {
-            position: relative;
-        }
+        .cart-btn { position: relative; }
         .cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 16px;
-            height: 16px;
-            background: var(--red);
-            color: #fff;
-            font-size: 9px;
-            font-weight: 700;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: -5px; right: -5px;
+            width: 16px; height: 16px;
+            background: var(--green); color: #fff;
+            font-size: 9px; font-weight: 700;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
         }
 
         /* ─── HERO ─── */
         .hero {
-            min-height: 88vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 80px 48px;
-            gap: 60px;
-            position: relative;
-            overflow: hidden;
+            min-height: 90vh;
+            display: grid; grid-template-columns: 1fr 1fr;
+            align-items: center; padding: 80px 48px; gap: 60px;
+            position: relative; overflow: hidden;
         }
-
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(74,173,122,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74,173,122,0.025) 1px, transparent 1px);
+            background-size: 44px 44px;
+            pointer-events: none;
+        }
         .hero::after {
             content: '';
-            position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 700px;
-            height: 700px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(90,158,212,0.06) 0%, transparent 70%);
+            position: absolute; top: -180px; right: -180px;
+            width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(74,173,122,0.07) 0%, transparent 70%);
             pointer-events: none;
         }
 
         .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 11.5px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: var(--blue);
-            background: rgba(90,158,212,0.1);
-            padding: 5px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(90,158,212,0.2);
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 11.5px; font-weight: 600; letter-spacing: 1.2px;
+            text-transform: uppercase; color: var(--green);
+            background: rgba(74,173,122,0.1); padding: 5px 14px;
+            border-radius: 20px; border: 1px solid rgba(74,173,122,0.2);
             margin-bottom: 24px;
         }
         .hero-eyebrow::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--blue);
+            content: ''; width: 6px; height: 6px;
+            border-radius: 50%; background: var(--green);
+            animation: blink 1.8s ease-in-out infinite;
         }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
 
         .hero-title {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(42px, 5vw, 68px);
-            font-weight: 800;
-            letter-spacing: -2px;
-            line-height: 1.02;
-            margin-bottom: 22px;
+            font-size: clamp(38px, 4.5vw, 64px);
+            font-weight: 800; letter-spacing: -2px; line-height: 1.02; margin-bottom: 22px;
         }
+        .hero-title .accent { color: var(--green); }
+        .hero-title .dim    { color: var(--sub); }
 
-        .hero-title .accent { color: var(--blue); }
-        .hero-title .dim    { color: var(--sub);  }
+        .hero-desc { font-size: 15px; color: var(--sub); line-height: 1.75; max-width: 460px; margin-bottom: 36px; }
+        .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 
-        .hero-desc {
-            font-size: 15.5px;
-            color: var(--sub);
-            line-height: 1.7;
-            max-width: 460px;
-            margin-bottom: 36px;
-        }
+        .hero-stats { display: flex; gap: 32px; margin-top: 52px; padding-top: 32px; border-top: 1px solid var(--border); }
+        .hstat-val { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -0.8px; }
+        .hstat-label { font-size: 12px; color: var(--sub); margin-top: 2px; }
 
-        .hero-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn-lg {
-            font-size: 14px;
-            padding: 10px 22px;
-            border-radius: 8px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 32px;
-            margin-top: 52px;
-            padding-top: 32px;
-            border-top: 1px solid var(--border);
-        }
-
-        .hstat-val {
-            font-family: 'Syne', sans-serif;
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: -0.8px;
-            color: var(--text);
-        }
-        .hstat-label {
-            font-size: 12px;
-            color: var(--sub);
-            margin-top: 2px;
-        }
-
-        /* Hero visual */
-        .hero-visual {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+        .hero-visual { display: flex; align-items: center; justify-content: center; position: relative; }
 
         .hero-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 28px;
-            width: 100%;
-            max-width: 380px;
-            position: relative;
-            overflow: hidden;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 20px; padding: 24px;
+            width: 100%; max-width: 360px; position: relative; overflow: hidden;
         }
-
         .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--blue), var(--green));
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--green), var(--blue));
             border-radius: 20px 20px 0 0;
         }
-
         .hcard-img {
-            width: 100%;
-            height: 200px;
-            background: var(--bg);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            overflow: hidden;
-            position: relative;
+            width: 100%; height: 180px; background: var(--bg);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 18px; position: relative; overflow: hidden;
         }
-
-        .hcard-img svg {
-            width: 100px;
-            opacity: 0.8;
-        }
-
+        .hcard-img svg { width: 130px; }
         .hcard-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--green);
-            color: #fff;
-            font-size: 10.5px;
-            font-weight: 700;
-            padding: 3px 9px;
-            border-radius: 20px;
-            letter-spacing: 0.4px;
+            position: absolute; top: 10px; right: 10px;
+            background: var(--green); color: #fff;
+            font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.4px;
         }
-
-        .hcard-name {
-            font-family: 'Syne', sans-serif;
-            font-size: 17px;
-            font-weight: 800;
-            letter-spacing: -0.4px;
-            margin-bottom: 4px;
-        }
-
-        .hcard-sub {
-            font-size: 12.5px;
-            color: var(--sub);
-            margin-bottom: 16px;
-        }
-
-        .hcard-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .hcard-price {
-            font-family: 'Syne', sans-serif;
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--text);
-        }
-        .hcard-price small {
-            font-size: 13px;
-            color: var(--sub);
-            font-family: 'DM Sans', sans-serif;
-            font-weight: 400;
-            margin-left: 2px;
-        }
+        .hcard-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 3px; }
+        .hcard-sub { font-size: 12px; color: var(--sub); margin-bottom: 14px; }
+        .hcard-bottom { display: flex; align-items: center; justify-content: space-between; }
+        .hcard-price { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; }
+        .hcard-price small { font-size: 12px; color: var(--sub); font-family: 'DM Sans', sans-serif; font-weight: 400; }
 
         .floating-tag {
-            position: absolute;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 14px;
-            font-size: 12px;
-            font-weight: 500;
+            position: absolute; background: var(--surface);
+            border: 1px solid var(--border); border-radius: 10px;
+            padding: 7px 13px; font-size: 12px; font-weight: 500;
         }
-
-        .float-1 {
-            top: 20px;
-            right: -24px;
-            color: var(--green);
-        }
-        .float-2 {
-            bottom: 30px;
-            left: -28px;
-            color: var(--amber);
-        }
+        .float-1 { top: 16px; right: -20px; color: var(--green); }
+        .float-2 { bottom: 24px; left: -24px; color: var(--amber); }
 
         /* ─── STRIP ─── */
         .strip {
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 48px;
-            display: flex;
-            align-items: center;
-            gap: 48px;
-            overflow: hidden;
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            padding: 14px 48px; display: flex; align-items: center; gap: 48px; overflow: hidden;
         }
-
-        .strip-label {
-            font-size: 10.5px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--muted);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .brands {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .brand {
-            font-family: 'Syne', sans-serif;
-            font-size: 14px;
-            font-weight: 800;
-            color: var(--muted);
-            letter-spacing: -0.3px;
-            white-space: nowrap;
-            transition: color .2s;
-        }
+        .strip-label { font-size: 10.5px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+        .brands { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
+        .brand { font-family: 'Syne', sans-serif; font-size: 12.5px; font-weight: 800; color: var(--muted); white-space: nowrap; transition: color .2s; }
         .brand:hover { color: var(--sub); }
 
-        /* ─── CATEGORIES ─── */
-        .section {
-            padding: 80px 48px;
-        }
+        /* ─── SECTIONS ─── */
+        .section { padding: 80px 48px; }
+        .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
+        .section-title { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -0.8px; }
+        .section-sub { font-size: 13px; color: var(--sub); margin-top: 4px; }
 
-        .section-header {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            margin-bottom: 36px;
-        }
-
-        .section-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-
-        .section-sub {
-            font-size: 13.5px;
-            color: var(--sub);
-            margin-top: 4px;
-        }
-
-        .cats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-        }
-
+        /* ─── CATEGORÍAS ─── */
+        .cats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
         .cat-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 28px 22px;
-            cursor: pointer;
-            transition: all .2s;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            display: block;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 26px 20px;
+            cursor: pointer; transition: all .2s;
+            position: relative; overflow: hidden; text-decoration: none; display: block;
         }
-
-        .cat-card:hover {
-            border-color: var(--muted);
-            transform: translateY(-2px);
-        }
-
-        .cat-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 3px;
-        }
-
-        .cat-card.blue::after  { background: var(--blue);  }
+        .cat-card:hover { border-color: var(--muted); transform: translateY(-2px); }
+        .cat-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
+        .cat-card.blue::after  { background: var(--blue); }
         .cat-card.green::after { background: var(--green); }
         .cat-card.amber::after { background: var(--amber); }
-        .cat-card.red::after   { background: var(--red);   }
+        .cat-card.red::after   { background: var(--red); }
+        .cat-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+        .cat-name { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+        .cat-count { font-size: 12px; color: var(--sub); }
 
-        .cat-icon {
-            font-size: 30px;
-            margin-bottom: 14px;
-            display: block;
-        }
-
-        .cat-name {
-            font-family: 'Syne', sans-serif;
-            font-size: 15px;
-            font-weight: 800;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-
-        .cat-count {
-            font-size: 12px;
-            color: var(--sub);
-        }
-
-        /* ─── PRODUCTS ─── */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
+        /* ─── PRODUCTOS ─── */
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .product-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all .2s;
-            position: relative;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; overflow: hidden; cursor: pointer; transition: all .2s;
         }
-
-        .product-card:hover {
-            border-color: var(--muted);
-            transform: translateY(-3px);
-        }
-
-        .product-card.featured {
-            grid-column: span 2;
-        }
-
+        .product-card:hover { border-color: var(--muted); transform: translateY(-3px); }
+        .product-card.featured { grid-column: span 2; }
         .product-img {
-            background: var(--bg);
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
+            background: var(--bg); height: 190px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
         }
-
-        .product-card.featured .product-img { height: 260px; }
-
-        .product-img-icon {
-            font-size: 60px;
-            opacity: 0.5;
+        .product-card.featured .product-img { height: 240px; }
+        .product-img::after {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(74,173,122,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74,173,122,0.04) 1px, transparent 1px);
+            background-size: 20px 20px; pointer-events: none;
         }
-
+        .product-img-icon { font-size: 56px; opacity: 0.55; }
         .prod-tag {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            font-size: 10.5px;
-            font-weight: 700;
-            padding: 3px 9px;
-            border-radius: 20px;
-            letter-spacing: 0.4px;
+            position: absolute; top: 10px; left: 10px;
+            font-size: 10.5px; font-weight: 700;
+            padding: 3px 9px; border-radius: 20px; letter-spacing: 0.3px; z-index: 1;
         }
+        .prod-tag.new   { background: rgba(90,158,212,.15);  color: var(--blue);  border: 1px solid rgba(90,158,212,.25); }
+        .prod-tag.sale  { background: rgba(224,82,82,.15);   color: var(--red);   border: 1px solid rgba(224,82,82,.25); }
+        .prod-tag.hot   { background: rgba(212,145,74,.15);  color: var(--amber); border: 1px solid rgba(212,145,74,.25); }
+        .prod-tag.stock { background: rgba(74,173,122,.15);  color: var(--green); border: 1px solid rgba(74,173,122,.25); }
 
-        .prod-tag.new    { background: rgba(90,158,212,.15);  color: var(--blue);  border: 1px solid rgba(90,158,212,.25); }
-        .prod-tag.sale   { background: rgba(224,82,82,.15);   color: var(--red);   border: 1px solid rgba(224,82,82,.25); }
-        .prod-tag.hot    { background: rgba(212,145,74,.15);  color: var(--amber); border: 1px solid rgba(212,145,74,.25); }
-        .prod-tag.stock  { background: rgba(74,173,122,.15);  color: var(--green); border: 1px solid rgba(74,173,122,.25); }
-
-        .product-body {
-            padding: 18px 20px;
-        }
-
-        .product-brand {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 6px;
-        }
-
-        .product-name {
-            font-family: 'Syne', sans-serif;
-            font-size: 15px;
-            font-weight: 800;
-            letter-spacing: -0.3px;
-            color: var(--text);
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-
-        .product-specs {
-            font-size: 12px;
-            color: var(--sub);
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-
-        .product-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .product-price {
-            font-family: 'Syne', sans-serif;
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .product-price-old {
-            font-size: 12px;
-            color: var(--muted);
-            text-decoration: line-through;
-            margin-left: 6px;
-        }
-
-        .product-stars {
-            font-size: 12px;
-            color: var(--amber);
-            letter-spacing: 1px;
-        }
-
+        .product-body { padding: 16px 18px; }
+        .product-brand { font-size: 10.5px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+        .product-name { font-family: 'Syne', sans-serif; font-size: 14.5px; font-weight: 800; letter-spacing: -0.3px; color: var(--text); margin-bottom: 5px; line-height: 1.3; }
+        .product-specs { font-size: 11.5px; color: var(--sub); margin-bottom: 14px; line-height: 1.5; }
+        .product-footer { display: flex; align-items: center; justify-content: space-between; }
+        .product-price { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 800; letter-spacing: -0.4px; }
+        .product-price-old { font-size: 11.5px; color: var(--muted); text-decoration: line-through; margin-left: 5px; }
+        .product-stars { font-size: 11px; color: var(--amber); letter-spacing: 1px; }
         .add-btn {
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
-            background: var(--text);
-            color: var(--bg);
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all .18s;
-            font-weight: 300;
+            width: 32px; height: 32px; border-radius: 7px;
+            background: var(--text); color: var(--bg); border: none;
+            font-size: 17px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: all .18s;
         }
-        .add-btn:hover { background: #c8c8ca; transform: scale(1.05); }
+        .add-btn:hover { background: #c8c8ca; transform: scale(1.06); }
 
         /* ─── BANNER ─── */
         .banner {
             margin: 0 48px 80px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 52px 60px;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 40px;
-            position: relative;
-            overflow: hidden;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 20px; padding: 48px 56px;
+            display: grid; grid-template-columns: 1fr auto;
+            align-items: center; gap: 40px;
+            position: relative; overflow: hidden;
         }
-
         .banner::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--blue), var(--green));
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+            background: linear-gradient(180deg, var(--green), var(--blue));
         }
-
-        .banner-eyebrow {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            color: var(--blue);
-            margin-bottom: 10px;
-        }
-
-        .banner-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 30px;
-            font-weight: 800;
-            letter-spacing: -0.8px;
-            line-height: 1.1;
-            margin-bottom: 10px;
-        }
-
-        .banner-sub {
-            font-size: 14px;
-            color: var(--sub);
-            line-height: 1.6;
-            max-width: 460px;
-        }
-
-        .countdown {
-            display: flex;
-            gap: 16px;
-        }
-
-        .cd-box {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px 18px;
-            text-align: center;
-            min-width: 64px;
-        }
-
-        .cd-num {
-            font-family: 'Syne', sans-serif;
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--text);
-        }
-
-        .cd-label {
-            font-size: 10px;
-            font-weight: 600;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-top: 2px;
-        }
+        .banner-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+        .banner-title { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; letter-spacing: -0.8px; line-height: 1.1; margin-bottom: 10px; }
+        .banner-sub { font-size: 13.5px; color: var(--sub); line-height: 1.6; max-width: 460px; }
+        .countdown { display: flex; gap: 14px; }
+        .cd-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; text-align: center; min-width: 60px; }
+        .cd-num { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -1px; }
+        .cd-label { font-size: 9.5px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
 
         /* ─── FEATURES ─── */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-        }
-
-        .feature {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px 20px;
-        }
-
-        .feat-icon {
-            font-size: 22px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .feat-title {
-            font-size: 13.5px;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 4px;
-        }
-
-        .feat-sub {
-            font-size: 12px;
-            color: var(--sub);
-            line-height: 1.5;
-        }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+        .feature { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; }
+        .feat-icon { font-size: 20px; margin-bottom: 10px; display: block; }
+        .feat-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+        .feat-sub { font-size: 12px; color: var(--sub); line-height: 1.5; }
 
         /* ─── TESTIMONIALS ─── */
-        .testi-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-        }
-
-        .testi {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 24px;
-        }
-
-        .testi-stars {
-            color: var(--amber);
-            font-size: 13px;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .testi-text {
-            font-size: 13.5px;
-            color: var(--sub);
-            line-height: 1.6;
-            margin-bottom: 18px;
-            font-style: italic;
-        }
-
-        .testi-author {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .testi-avatar {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            background: var(--muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--sub);
-            flex-shrink: 0;
-        }
-
-        .testi-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .testi-location {
-            font-size: 11.5px;
-            color: var(--muted);
-        }
+        .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+        .testi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+        .testi-stars { color: var(--amber); font-size: 12px; letter-spacing: 2px; margin-bottom: 12px; }
+        .testi-text { font-size: 13px; color: var(--sub); line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+        .testi-author { display: flex; align-items: center; gap: 10px; }
+        .testi-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--muted); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--sub); flex-shrink: 0; }
+        .testi-name { font-size: 13px; font-weight: 600; color: var(--text); }
+        .testi-location { font-size: 11.5px; color: var(--muted); }
 
         /* ─── NEWSLETTER ─── */
-        .newsletter {
-            margin: 0 48px 80px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 60px;
-            text-align: center;
-        }
-
-        .news-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 36px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 12px;
-        }
-
-        .news-sub {
-            font-size: 14px;
-            color: var(--sub);
-            margin-bottom: 32px;
-        }
-
-        .news-form {
-            display: flex;
-            gap: 10px;
-            max-width: 440px;
-            margin: 0 auto;
-        }
-
-        .news-input {
-            flex: 1;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 16px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 13.5px;
-            color: var(--text);
-            outline: none;
-            transition: border-color .18s;
-        }
+        .newsletter { margin: 0 48px 80px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 56px; text-align: center; }
+        .news-title { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+        .news-sub { font-size: 13.5px; color: var(--sub); margin-bottom: 28px; }
+        .news-form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
+        .news-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 13.5px; color: var(--text); outline: none; transition: border-color .18s; }
         .news-input::placeholder { color: var(--muted); }
         .news-input:focus { border-color: var(--muted); }
 
         /* ─── FOOTER ─── */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 60px 48px 36px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-
-        .footer-brand .nav-logo {
-            display: inline-block;
-            margin-bottom: 14px;
-        }
-
-        .footer-desc {
-            font-size: 13px;
-            color: var(--sub);
-            line-height: 1.7;
-            max-width: 260px;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 8px;
-        }
-
-        .social-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 7px;
-            background: var(--border);
-            border: 1px solid var(--muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            color: var(--sub);
-            cursor: pointer;
-            transition: all .15s;
-            text-decoration: none;
-        }
+        footer { border-top: 1px solid var(--border); padding: 60px 48px 36px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        .footer-brand .nav-logo { display: inline-block; margin-bottom: 14px; }
+        .footer-desc { font-size: 13px; color: var(--sub); line-height: 1.7; max-width: 260px; margin-bottom: 20px; }
+        .social-links { display: flex; gap: 8px; }
+        .social-btn { width: 32px; height: 32px; border-radius: 7px; background: var(--border); border: 1px solid var(--muted); display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--sub); cursor: pointer; transition: all .15s; text-decoration: none; }
         .social-btn:hover { background: var(--muted); color: var(--text); }
-
-        .footer-col-title {
-            font-size: 11.5px;
-            font-weight: 700;
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            color: var(--text);
-            margin-bottom: 18px;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .footer-links a {
-            font-size: 13px;
-            color: var(--sub);
-            text-decoration: none;
-            transition: color .15s;
-        }
+        .footer-col-title { font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text); margin-bottom: 16px; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links a { font-size: 13px; color: var(--sub); text-decoration: none; transition: color .15s; }
         .footer-links a:hover { color: var(--text); }
+        .footer-bottom { border-top: 1px solid var(--border); padding-top: 22px; display: flex; align-items: center; justify-content: space-between; }
+        .footer-copy { font-size: 12px; color: var(--muted); }
+        .footer-badges { display: flex; gap: 8px; }
+        .pay-badge { background: var(--surface); border: 1px solid var(--border); border-radius: 5px; padding: 4px 10px; font-size: 11px; font-weight: 600; color: var(--muted); }
 
-        .footer-bottom {
-            border-top: 1px solid var(--border);
-            padding-top: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .footer-copy {
-            font-size: 12.5px;
-            color: var(--muted);
-        }
-
-        .footer-badges {
-            display: flex;
-            gap: 8px;
-        }
-
-        .pay-badge {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            padding: 4px 10px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--muted);
-        }
-
-        /* ─── WHATSAPP FLOTANTE ─── */
-        .wa-float {
-            position: fixed;
-            bottom: 28px;
-            left: 28px;
-            z-index: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .wa-btn {
-            width: 54px;
-            height: 54px;
-            border-radius: 50%;
-            background: #25D366;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 20px rgba(37,211,102,0.35);
-            transition: transform .2s, box-shadow .2s;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        .wa-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 28px rgba(37,211,102,0.5);
-        }
-
-        .wa-btn svg {
-            width: 28px;
-            height: 28px;
-            fill: #fff;
-        }
-
-        .wa-tooltip {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px 14px;
-            font-size: 12.5px;
-            color: var(--text);
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateX(-8px);
-            transition: opacity .2s, transform .2s;
-            pointer-events: none;
-        }
-
-        .wa-float:hover .wa-tooltip {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
+        /* ─── WHATSAPP ─── */
+        .wa-float { position: fixed; bottom: 28px; left: 28px; z-index: 500; display: flex; align-items: center; gap: 10px; }
+        .wa-btn { width: 54px; height: 54px; border-radius: 50%; background: #25D366; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: transform .2s, box-shadow .2s; text-decoration: none; flex-shrink: 0; }
+        .wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+        .wa-btn svg { width: 28px; height: 28px; fill: #fff; }
+        .wa-tooltip { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; font-size: 12.5px; color: var(--text); white-space: nowrap; opacity: 0; transform: translateX(-8px); transition: opacity .2s, transform .2s; pointer-events: none; }
+        .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0); }
         .wa-tooltip strong { color: #25D366; font-weight: 600; }
+
+        /* ─── TOAST ─── */
+        .toast { position: fixed; bottom: 32px; right: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 13px 18px; font-size: 13px; color: var(--text); z-index: 9000; display: flex; align-items: center; gap: 10px; transform: translateY(80px); opacity: 0; transition: all .3s ease; pointer-events: none; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 
         /* ─── SCROLLBAR ─── */
         ::-webkit-scrollbar { width: 5px; }
@@ -981,52 +340,12 @@
         ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 10px; }
 
         /* ─── ANIMATIONS ─── */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(16px);
-            animation: fadeUp .5s ease forwards;
-        }
-
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .fade-in { opacity: 0; transform: translateY(14px); animation: fadeUp .5s ease forwards; }
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
         .fade-in:nth-child(1) { animation-delay: .05s; }
         .fade-in:nth-child(2) { animation-delay: .12s; }
         .fade-in:nth-child(3) { animation-delay: .19s; }
         .fade-in:nth-child(4) { animation-delay: .26s; }
-
-        /* ─── TOAST ─── */
-        .toast {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px 18px;
-            font-size: 13.5px;
-            color: var(--text);
-            z-index: 9000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transform: translateY(80px);
-            opacity: 0;
-            transition: all .3s ease;
-            pointer-events: none;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-        }
-
-        .toast.show { transform: translateY(0); opacity: 1; }
-
-        .toast-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            flex-shrink: 0;
-        }
     </style>
 </head>
 <body>
@@ -1038,7 +357,7 @@
         <li><a href="#productos">Productos</a></li>
         <li><a href="#categorias">Categorías</a></li>
         <li><a href="#ofertas">Ofertas</a></li>
-        <li><a href="#">Marcas</a></li>
+        <li><a href="#">Proyectos DIY</a></li>
         <li><a href="#">Soporte</a></li>
     </ul>
     <div class="nav-right">
@@ -1053,29 +372,30 @@
 <!-- ─── HERO ─── -->
 <section class="hero">
     <div>
+        <div class="hero-eyebrow">Componentes electrónicos · Bolivia</div>
         <h1 class="hero-title">
-            El futuro<br>
-            <span class="accent">tecnológico</span><br>
-            <span class="dim">está aquí.</span>
+            Construye<br>
+            <span class="accent">tu próximo</span><br>
+            <span class="dim">proyecto.</span>
         </h1>
         <p class="hero-desc">
-            Encuentra los últimos equipos, smartphones, laptops y accesorios tecnológicos con la mejor garantía y servicio técnico especializado de Bolivia.
+            Arduinos, microchips, sensores, módulos, drones y todo lo que necesitas para tus proyectos de electrónica. Componentes originales con soporte técnico especializado en Bolivia.
         </p>
         <div class="hero-actions">
-            <a href="#productos" class="btn btn-primary btn-lg">Ver productos →</a>
-            <a href="#ofertas" class="btn btn-lg">Ver ofertas</a>
+            <a href="#productos" class="btn btn-primary btn-lg">Ver componentes →</a>
+            <a href="#categorias" class="btn btn-lg">Explorar categorías</a>
         </div>
         <div class="hero-stats">
             <div>
-                <div class="hstat-val">+4,200</div>
-                <div class="hstat-label">Productos disponibles</div>
+                <div class="hstat-val">+3,800</div>
+                <div class="hstat-label">Componentes en stock</div>
             </div>
             <div>
-                <div class="hstat-val">12,000+</div>
-                <div class="hstat-label">Clientes satisfechos</div>
+                <div class="hstat-val">6,500+</div>
+                <div class="hstat-label">Makers satisfechos</div>
             </div>
             <div>
-                <div class="hstat-val">72h</div>
+                <div class="hstat-val">48h</div>
                 <div class="hstat-label">Entrega en Bolivia</div>
             </div>
         </div>
@@ -1085,47 +405,68 @@
         <div class="floating-tag float-1">✓ Stock disponible</div>
         <div class="hero-card">
             <div class="hcard-img">
-                <span class="hcard-badge">NUEVO</span>
-                <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="10" y="8" width="100" height="54" rx="6" fill="#252528" stroke="#3a3a3e"/>
-                    <rect x="14" y="12" width="92" height="46" rx="4" fill="#161618"/>
-                    <rect x="18" y="16" width="84" height="38" rx="3" fill="#0a0a0b"/>
-                    <rect x="22" y="20" width="40" height="5" rx="2" fill="#3a3a3e"/>
-                    <rect x="22" y="28" width="28" height="3" rx="1.5" fill="#252528"/>
-                    <rect x="22" y="34" width="60" height="3" rx="1.5" fill="#252528"/>
-                    <rect x="22" y="40" width="50" height="3" rx="1.5" fill="#252528"/>
-                    <rect x="66" y="20" width="28" height="20" rx="3" fill="#1a2a3a"/>
-                    <rect x="40" y="62" width="40" height="4" rx="2" fill="#252528"/>
-                    <rect x="30" y="66" width="60" height="6" rx="3" fill="#1e1e20"/>
-                    <circle cx="92" cy="26" r="8" fill="#5a9ed4" opacity="0.2"/>
-                    <circle cx="92" cy="26" r="4" fill="#5a9ed4" opacity="0.6"/>
+                <span class="hcard-badge">POPULAR</span>
+                <svg viewBox="0 0 140 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="8" y="10" width="124" height="70" rx="5" fill="#1a2e1a" stroke="#2a4a2a"/>
+                    <rect x="12" y="14" width="6" height="62" rx="1" fill="#0a1a0a"/>
+                    <circle cx="15" cy="20" r="2" fill="#4aad7a" opacity=".8"/>
+                    <circle cx="15" cy="28" r="2" fill="#4aad7a" opacity=".8"/>
+                    <circle cx="15" cy="36" r="2" fill="#4aad7a" opacity=".8"/>
+                    <circle cx="15" cy="44" r="2" fill="#4aad7a" opacity=".8"/>
+                    <circle cx="15" cy="52" r="2" fill="#4aad7a" opacity=".8"/>
+                    <circle cx="15" cy="60" r="2" fill="#4aad7a" opacity=".8"/>
+                    <circle cx="15" cy="68" r="2" fill="#4aad7a" opacity=".8"/>
+                    <rect x="122" y="14" width="6" height="62" rx="1" fill="#0a1a0a"/>
+                    <circle cx="125" cy="20" r="2" fill="#5a9ed4" opacity=".8"/>
+                    <circle cx="125" cy="28" r="2" fill="#5a9ed4" opacity=".8"/>
+                    <circle cx="125" cy="36" r="2" fill="#5a9ed4" opacity=".8"/>
+                    <circle cx="125" cy="44" r="2" fill="#5a9ed4" opacity=".8"/>
+                    <circle cx="125" cy="52" r="2" fill="#5a9ed4" opacity=".8"/>
+                    <circle cx="125" cy="60" r="2" fill="#5a9ed4" opacity=".8"/>
+                    <rect x="48" y="24" width="44" height="34" rx="3" fill="#111" stroke="#3a3a3e"/>
+                    <rect x="52" y="28" width="36" height="26" rx="2" fill="#1a1a1c"/>
+                    <rect x="54" y="22" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="62" y="22" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="70" y="22" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="78" y="22" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="54" y="56" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="62" y="56" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="70" y="56" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="78" y="56" width="4" height="4" rx="1" fill="#3a3a3e"/>
+                    <rect x="26" y="34" width="16" height="10" rx="2" fill="#252528" stroke="#3a3a3e"/>
+                    <circle cx="34" cy="70" r="3" fill="#4aad7a" opacity=".9"/>
+                    <circle cx="44" cy="70" r="3" fill="#e05252" opacity=".6"/>
+                    <rect x="96" y="30" width="8" height="14" rx="2" fill="#252528" stroke="#3a3a3e"/>
+                    <rect x="108" y="32" width="6" height="10" rx="1" fill="#1a2e1a" stroke="#3a3a3e"/>
+                    <line x1="22" y1="44" x2="48" y2="44" stroke="#4aad7a" stroke-width="0.8" opacity=".4"/>
+                    <line x1="92" y1="38" x2="96" y2="38" stroke="#5a9ed4" stroke-width="0.8" opacity=".4"/>
                 </svg>
             </div>
-            <div class="hcard-name">UltraBook Pro X1</div>
-            <div class="hcard-sub">Intel Core i9 · 32GB RAM · 2TB SSD</div>
+            <div class="hcard-name">Arduino Mega 2560 R3</div>
+            <div class="hcard-sub">ATmega2560 · 54 I/O · 16MHz · USB-B</div>
             <div class="hcard-bottom">
                 <div>
-                    <div class="hcard-price">Bs. 8,490 <small>BOB</small></div>
+                    <div class="hcard-price">Bs. 185 <small>BOB</small></div>
                 </div>
-                <button class="btn btn-primary" onclick="addToCart('UltraBook Pro X1')">Agregar</button>
+                <button class="btn btn-primary" onclick="addToCart('Arduino Mega 2560')">Agregar</button>
             </div>
         </div>
-        <div class="floating-tag float-2">⭐ 4.9 · 238 reseñas</div>
+        <div class="floating-tag float-2">⭐ 4.9 · 312 reseñas</div>
     </div>
 </section>
 
 <!-- ─── BRAND STRIP ─── -->
 <div class="strip">
-    <span class="strip-label">Marcas oficiales</span>
+    <span class="strip-label">Marcas disponibles</span>
     <div class="brands">
-        <span class="brand">SAMSUNG</span>
-        <span class="brand">APPLE</span>
-        <span class="brand">LENOVO</span>
-        <span class="brand">ASUS</span>
-        <span class="brand">SONY</span>
-        <span class="brand">LG</span>
-        <span class="brand">HP</span>
-        <span class="brand">XIAOMI</span>
+        <span class="brand">ARDUINO</span>
+        <span class="brand">RASPBERRY PI</span>
+        <span class="brand">ESP32</span>
+        <span class="brand">TEXAS INSTRUMENTS</span>
+        <span class="brand">STM32</span>
+        <span class="brand">DJI</span>
+        <span class="brand">SEEED STUDIO</span>
+        <span class="brand">ADAFRUIT</span>
     </div>
 </div>
 
@@ -1134,30 +475,30 @@
     <div class="section-header">
         <div>
             <div class="section-title">Categorías</div>
-            <div class="section-sub">Encuentra exactamente lo que buscas</div>
+            <div class="section-sub">Todo para tu próximo proyecto electrónico</div>
         </div>
         <a href="#" class="btn">Ver todas →</a>
     </div>
     <div class="cats-grid">
-        <a href="#" class="cat-card blue fade-in">
-            <span class="cat-icon">💻</span>
-            <div class="cat-name">Laptops & PCs</div>
-            <div class="cat-count">348 productos</div>
-        </a>
         <a href="#" class="cat-card green fade-in">
-            <span class="cat-icon">📱</span>
-            <div class="cat-name">Smartphones</div>
-            <div class="cat-count">512 productos</div>
+            <span class="cat-icon">🔌</span>
+            <div class="cat-name">Microcontroladores</div>
+            <div class="cat-count">Arduino, ESP32, STM32 · 240 refs.</div>
+        </a>
+        <a href="#" class="cat-card blue fade-in">
+            <span class="cat-icon">📡</span>
+            <div class="cat-name">Módulos & Sensores</div>
+            <div class="cat-count">WiFi, BT, GPS, IMU · 580 refs.</div>
         </a>
         <a href="#" class="cat-card amber fade-in">
-            <span class="cat-icon">🎧</span>
-            <div class="cat-name">Audio & Gaming</div>
-            <div class="cat-count">276 productos</div>
+            <span class="cat-icon">🚁</span>
+            <div class="cat-name">Drones & FPV</div>
+            <div class="cat-count">Frames, ESCs, motores · 310 refs.</div>
         </a>
         <a href="#" class="cat-card red fade-in">
-            <span class="cat-icon">📷</span>
-            <div class="cat-name">Fotografía</div>
-            <div class="cat-count">194 productos</div>
+            <span class="cat-icon">⚡</span>
+            <div class="cat-name">Circuitos & Pasivos</div>
+            <div class="cat-count">Resistencias, caps, ICs · 1,200 refs.</div>
         </a>
     </div>
 </section>
@@ -1167,29 +508,28 @@
     <div class="section-header">
         <div>
             <div class="section-title">Productos destacados</div>
-            <div class="section-sub">Lo más vendido esta semana</div>
+            <div class="section-sub">Lo más pedido por la comunidad maker de Bolivia</div>
         </div>
         <a href="#" class="btn">Ver catálogo →</a>
     </div>
     <div class="products-grid">
 
-        <!-- Featured -->
         <div class="product-card featured">
             <div class="product-img">
                 <span class="prod-tag hot">🔥 Más vendido</span>
-                <span class="product-img-icon">📱</span>
+                <span class="product-img-icon">🚁</span>
             </div>
             <div class="product-body">
-                <div class="product-brand">Samsung</div>
-                <div class="product-name">Galaxy S25 Ultra 5G</div>
-                <div class="product-specs">6.8" AMOLED · 200MP · 5000mAh · 12GB RAM · 256GB</div>
+                <div class="product-brand">Kit FPV Racing</div>
+                <div class="product-name">Kit Drone FPV Racing 5" completo</div>
+                <div class="product-specs">Frame 5" · F7 FC · 4in1 ESC 45A · Motores 2306 2400KV · VTX 600mW</div>
                 <div class="product-footer">
                     <div>
-                        <span class="product-price">Bs. 5,890</span>
-                        <span class="product-price-old">Bs. 6,500</span>
+                        <span class="product-price">Bs. 1,890</span>
+                        <span class="product-price-old">Bs. 2,200</span>
                         <div class="product-stars">★★★★★</div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('Galaxy S25 Ultra')">+</button>
+                    <button class="add-btn" onclick="addToCart('Kit Drone FPV 5&quot;')">+</button>
                 </div>
             </div>
         </div>
@@ -1197,38 +537,38 @@
         <div class="product-card">
             <div class="product-img">
                 <span class="prod-tag new">Nuevo</span>
-                <span class="product-img-icon">🎧</span>
+                <span class="product-img-icon">🔌</span>
             </div>
             <div class="product-body">
-                <div class="product-brand">Sony</div>
-                <div class="product-name">WH-1000XM6</div>
-                <div class="product-specs">ANC · 40h batería · Hi-Res Audio</div>
+                <div class="product-brand">Espressif</div>
+                <div class="product-name">ESP32-S3 DevKit</div>
+                <div class="product-specs">Dual-core 240MHz · WiFi + BT5 · 8MB Flash · USB-OTG</div>
                 <div class="product-footer">
                     <div>
-                        <span class="product-price">Bs. 1,490</span>
+                        <span class="product-price">Bs. 65</span>
                         <div class="product-stars">★★★★★</div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('WH-1000XM6')">+</button>
+                    <button class="add-btn" onclick="addToCart('ESP32-S3 DevKit')">+</button>
                 </div>
             </div>
         </div>
 
         <div class="product-card">
             <div class="product-img">
-                <span class="prod-tag sale">-20%</span>
-                <span class="product-img-icon">⌚</span>
+                <span class="prod-tag sale">-15%</span>
+                <span class="product-img-icon">🍓</span>
             </div>
             <div class="product-body">
-                <div class="product-brand">Apple</div>
-                <div class="product-name">Watch Ultra 3</div>
-                <div class="product-specs">49mm · Titanio · GPS dual · 72h batería</div>
+                <div class="product-brand">Raspberry Pi Foundation</div>
+                <div class="product-name">Raspberry Pi 5 — 8GB</div>
+                <div class="product-specs">ARM Cortex-A76 · 8GB LPDDR4X · PCIe · 2× USB3</div>
                 <div class="product-footer">
                     <div>
-                        <span class="product-price">Bs. 4,290</span>
-                        <span class="product-price-old">Bs. 5,350</span>
-                        <div class="product-stars">★★★★☆</div>
+                        <span class="product-price">Bs. 620</span>
+                        <span class="product-price-old">Bs. 730</span>
+                        <div class="product-stars">★★★★★</div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('Watch Ultra 3')">+</button>
+                    <button class="add-btn" onclick="addToCart('Raspberry Pi 5 8GB')">+</button>
                 </div>
             </div>
         </div>
@@ -1236,37 +576,37 @@
         <div class="product-card">
             <div class="product-img">
                 <span class="prod-tag stock">En stock</span>
-                <span class="product-img-icon">🖥️</span>
+                <span class="product-img-icon">📡</span>
             </div>
             <div class="product-body">
-                <div class="product-brand">LG</div>
-                <div class="product-name">UltraGear 27" 4K</div>
-                <div class="product-specs">144Hz · 1ms · IPS · HDR600</div>
+                <div class="product-brand">u-blox</div>
+                <div class="product-name">Módulo GPS NEO-8M</div>
+                <div class="product-specs">10Hz · UART/I2C · Antena cerámica · Brújula HMC5883</div>
                 <div class="product-footer">
                     <div>
-                        <span class="product-price">Bs. 2,890</span>
-                        <div class="product-stars">★★★★★</div>
+                        <span class="product-price">Bs. 95</span>
+                        <div class="product-stars">★★★★☆</div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('LG UltraGear 27')">+</button>
+                    <button class="add-btn" onclick="addToCart('GPS NEO-8M')">+</button>
                 </div>
             </div>
         </div>
 
         <div class="product-card">
             <div class="product-img">
-                <span class="prod-tag new">Nuevo</span>
-                <span class="product-img-icon">💻</span>
+                <span class="prod-tag new">Kit</span>
+                <span class="product-img-icon">🧰</span>
             </div>
             <div class="product-body">
-                <div class="product-brand">ASUS</div>
-                <div class="product-name">ROG Zephyrus G16</div>
-                <div class="product-specs">RTX 4080 · i9-14900H · 32GB · 1TB</div>
+                <div class="product-brand">Kit genérico</div>
+                <div class="product-name">Kit Iniciación Electrónica Pro</div>
+                <div class="product-specs">830 pts protoboard · 400 componentes · cables · multímetro</div>
                 <div class="product-footer">
                     <div>
-                        <span class="product-price">Bs. 9,990</span>
+                        <span class="product-price">Bs. 310</span>
                         <div class="product-stars">★★★★★</div>
                     </div>
-                    <button class="add-btn" onclick="addToCart('ROG Zephyrus G16')">+</button>
+                    <button class="add-btn" onclick="addToCart('Kit Iniciación Electrónica')">+</button>
                 </div>
             </div>
         </div>
@@ -1277,17 +617,17 @@
 <!-- ─── BANNER OFERTA ─── -->
 <div class="banner" id="ofertas">
     <div>
-        <div class="banner-eyebrow">⚡ Oferta del día</div>
-        <div class="banner-title">Hasta 35% de descuento<br>en laptops seleccionadas</div>
-        <div class="banner-sub">Solo por tiempo limitado. Aplica en modelos HP, Lenovo y Dell con garantía extendida incluida.</div>
-        <div style="margin-top: 24px; display: flex; gap: 10px;">
-            <button class="btn btn-primary btn-lg" onclick="showToast('Redirigiendo a ofertas…')">Ver ofertas →</button>
-            <button class="btn btn-lg" onclick="showToast('Función próximamente')">Suscribirme a alertas</button>
+        <div class="banner-eyebrow">⚡ Oferta de la semana</div>
+        <div class="banner-title">20% off en módulos ESP32<br>y kits de Arduino</div>
+        <div class="banner-sub">Perfectos para proyectos IoT, domótica, robots y prototipos. Stock limitado, oferta válida hasta agotar existencias.</div>
+        <div style="margin-top: 22px; display: flex; gap: 10px;">
+            <button class="btn btn-primary btn-lg" onclick="showToast('Aplicando descuento…')">Ver ofertas →</button>
+            <button class="btn btn-lg" onclick="showToast('Te avisaremos de nuevas ofertas')">Alertarme</button>
         </div>
     </div>
-    <div class="countdown" id="countdown">
-        <div class="cd-box"><div class="cd-num" id="cdH">08</div><div class="cd-label">Horas</div></div>
-        <div class="cd-box"><div class="cd-num" id="cdM">24</div><div class="cd-label">Minutos</div></div>
+    <div class="countdown">
+        <div class="cd-box"><div class="cd-num" id="cdH">03</div><div class="cd-label">Horas</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdM">47</div><div class="cd-label">Minutos</div></div>
         <div class="cd-box"><div class="cd-num" id="cdS">00</div><div class="cd-label">Segundos</div></div>
     </div>
 </div>
@@ -1298,22 +638,22 @@
         <div class="feature">
             <span class="feat-icon">🚚</span>
             <div class="feat-title">Envío a toda Bolivia</div>
-            <div class="feat-sub">Entrega en 24-72h a las principales ciudades del país.</div>
+            <div class="feat-sub">Entregas en 24-72h a Cbba, La Paz, Santa Cruz y más ciudades.</div>
         </div>
         <div class="feature">
             <span class="feat-icon">🛡️</span>
-            <div class="feat-title">Garantía oficial</div>
-            <div class="feat-sub">Todos los productos cuentan con garantía del fabricante.</div>
+            <div class="feat-title">Componentes originales</div>
+            <div class="feat-sub">Trazabilidad completa. Sin chips clonados ni refurbished.</div>
         </div>
         <div class="feature">
-            <span class="feat-icon">🔄</span>
-            <div class="feat-title">Devoluciones fáciles</div>
-            <div class="feat-sub">30 días para devolver sin preguntas si no estás satisfecho.</div>
+            <span class="feat-icon">🔧</span>
+            <div class="feat-title">Soporte técnico maker</div>
+            <div class="feat-sub">Ingenieros electrónicos listos para ayudarte con tu proyecto.</div>
         </div>
         <div class="feature">
-            <span class="feat-icon">💬</span>
-            <div class="feat-title">Soporte 24/7</div>
-            <div class="feat-sub">Técnicos certificados disponibles todos los días del año.</div>
+            <span class="feat-icon">📦</span>
+            <div class="feat-title">Pedidos al por mayor</div>
+            <div class="feat-sub">Precios especiales para talleres, colegios y empresas.</div>
         </div>
     </div>
 </section>
@@ -1322,41 +662,41 @@
 <section class="section" style="padding-top: 0;">
     <div class="section-header">
         <div>
-            <div class="section-title">Lo que dicen nuestros clientes</div>
-            <div class="section-sub">Más de 12,000 bolivianos confían en TecBolivia</div>
+            <div class="section-title">Lo que dice la comunidad</div>
+            <div class="section-sub">Makers, estudiantes e ingenieros que confían en TecBolivia</div>
         </div>
     </div>
     <div class="testi-grid">
         <div class="testi">
             <div class="testi-stars">★★★★★</div>
-            <div class="testi-text">"Recibí mi laptop en menos de 24 horas en Cochabamba. La garantía y el servicio post-venta son excelentes. Definitivamente mi tienda tech de referencia."</div>
+            <div class="testi-text">"Compré los ESP32 y sensores para mi tesis IoT. Todo llegó en 24h a Cochabamba y el soporte técnico me ayudó a resolver un problema de firmware al instante."</div>
             <div class="testi-author">
-                <div class="testi-avatar">MC</div>
+                <div class="testi-avatar">LR</div>
                 <div>
-                    <div class="testi-name">Marco Castro</div>
-                    <div class="testi-location">Cochabamba · Laptop HP Pavilion</div>
+                    <div class="testi-name">Luis Ríos</div>
+                    <div class="testi-location">Cbba · Tesis IoT — UMSS</div>
                 </div>
             </div>
         </div>
         <div class="testi">
             <div class="testi-stars">★★★★★</div>
-            <div class="testi-text">"Compré el Samsung Galaxy S25 y fue una experiencia increíble. Precio justo, producto 100% original y llegó perfectamente embalado."</div>
+            <div class="testi-text">"Pedí el kit completo para mi primer drone FPV. Calidad de los componentes excelente y el mejor precio que encontré en Bolivia. El seguimiento del envío fue perfecto."</div>
             <div class="testi-author">
-                <div class="testi-avatar">AS</div>
+                <div class="testi-avatar">CM</div>
                 <div>
-                    <div class="testi-name">Andrea Salinas</div>
-                    <div class="testi-location">La Paz · Samsung Galaxy S25</div>
+                    <div class="testi-name">Carlos Mamani</div>
+                    <div class="testi-location">La Paz · Drone FPV Racing</div>
                 </div>
             </div>
         </div>
         <div class="testi">
-            <div class="testi-stars">★★★★☆</div>
-            <div class="testi-text">"El soporte técnico me ayudó a configurar todo mi setup gamer. Muy atentos y conocen perfectamente los productos que venden."</div>
+            <div class="testi-stars">★★★★★</div>
+            <div class="testi-text">"Usamos TecBolivia para abastecer el laboratorio de electrónica del colegio. Precios justos, facturas al día y atención impecable. Los recomiendo sin dudar."</div>
             <div class="testi-author">
-                <div class="testi-avatar">RV</div>
+                <div class="testi-avatar">PV</div>
                 <div>
-                    <div class="testi-name">Roberto Vargas</div>
-                    <div class="testi-location">Santa Cruz · ASUS ROG</div>
+                    <div class="testi-name">Prof. Patricia Vega</div>
+                    <div class="testi-location">Santa Cruz · Lab. Electrónica</div>
                 </div>
             </div>
         </div>
@@ -1365,8 +705,8 @@
 
 <!-- ─── NEWSLETTER ─── -->
 <div class="newsletter">
-    <div class="news-title">Sé el primero en conocer las ofertas</div>
-    <div class="news-sub">Recibe notificaciones de descuentos exclusivos, lanzamientos y restock directamente en tu correo.</div>
+    <div class="news-title">Únete a la comunidad maker</div>
+    <div class="news-sub">Recibe tutoriales, novedades de componentes, ofertas exclusivas y proyectos DIY en tu correo.</div>
     <div class="news-form">
         <input type="email" class="news-input" placeholder="tu@correo.com" id="emailInput">
         <button class="btn btn-primary btn-lg" onclick="subscribeNewsletter()">Suscribirme →</button>
@@ -1379,50 +719,51 @@
         <div class="footer-brand">
             <a class="nav-logo" href="#">TEC<span>Bolivia</span></a>
             <div class="footer-desc">
-                La tienda de tecnología más confiable de Bolivia. Productos originales, garantía real y soporte técnico especializado desde 2018.
+                La tienda de componentes electrónicos más completa de Bolivia. Arduinos, drones, microchips, sensores y mucho más para tu próximo proyecto.
             </div>
             <div class="social-links">
                 <a href="#" class="social-btn" onclick="showToast('Facebook TecBolivia')">f</a>
                 <a href="#" class="social-btn" onclick="showToast('Instagram @tecbolivia')">in</a>
                 <a href="#" class="social-btn" onclick="showToast('WhatsApp TecBolivia')">w</a>
-                <a href="#" class="social-btn" onclick="showToast('TikTok @tecbolivia')">tt</a>
+                <a href="#" class="social-btn" onclick="showToast('YouTube TecBolivia')">yt</a>
             </div>
         </div>
         <div>
             <div class="footer-col-title">Tienda</div>
             <ul class="footer-links">
-                <li><a href="#">Laptops & PCs</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Audio & Gaming</a></li>
-                <li><a href="#">Fotografía</a></li>
-                <li><a href="#">Accesorios</a></li>
-                <li><a href="#">Outlet</a></li>
+                <li><a href="#">Microcontroladores</a></li>
+                <li><a href="#">Módulos & Sensores</a></li>
+                <li><a href="#">Drones & FPV</a></li>
+                <li><a href="#">Circuitos & Pasivos</a></li>
+                <li><a href="#">Herramientas</a></li>
+                <li><a href="#">Kits & Proyectos</a></li>
             </ul>
         </div>
         <div>
-            <div class="footer-col-title">Soporte</div>
+            <div class="footer-col-title">Recursos</div>
             <ul class="footer-links">
-                <li><a href="#">Centro de ayuda</a></li>
+                <li><a href="#">Tutoriales</a></li>
+                <li><a href="#">Proyectos DIY</a></li>
+                <li><a href="#">Datasheets</a></li>
+                <li><a href="#">Soporte técnico</a></li>
                 <li><a href="#">Seguimiento de pedido</a></li>
-                <li><a href="#">Garantías</a></li>
                 <li><a href="#">Devoluciones</a></li>
-                <li><a href="#">Técnicos certificados</a></li>
-                <li><a href="#">Contacto</a></li>
             </ul>
         </div>
         <div>
             <div class="footer-col-title">Empresa</div>
             <ul class="footer-links">
                 <li><a href="#">Sobre TecBolivia</a></li>
-                <li><a href="#">Trabaja con nosotros</a></li>
+                <li><a href="#">Ventas al por mayor</a></li>
                 <li><a href="#">Distribuidores</a></li>
+                <li><a href="#">Trabaja con nosotros</a></li>
                 <li><a href="#">Política de privacidad</a></li>
                 <li><a href="#">Términos y condiciones</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <div class="footer-copy">© 2025 TecBolivia. Todos los derechos reservados. Cochabamba, Bolivia.</div>
+        <div class="footer-copy">© 2025 TecBolivia — Electrónica & Componentes. Cochabamba, Bolivia.</div>
         <div class="footer-badges">
             <span class="pay-badge">Visa</span>
             <span class="pay-badge">Mastercard</span>
@@ -1432,21 +773,14 @@
     </div>
 </footer>
 
-<!-- ─── WHATSAPP FLOTANTE ─── -->
+<!-- ─── WHATSAPP ─── -->
 <div class="wa-float">
-    <a class="wa-btn"
-       href="https://wa.me/15551625988"
-       target="_blank"
-       rel="noopener noreferrer"
-       title="Chat de WhatsApp">
+    <a class="wa-btn" href="https://wa.me/15551625988" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
     </a>
-    <div class="wa-tooltip">
-        <strong>¿Necesitas ayuda?</strong><br>
-        Escribele con nuestro Agente
-    </div>
+    <div class="wa-tooltip"><strong>¿Necesitas ayuda?</strong><br>Habla con nuestro Agente</div>
 </div>
 
 <!-- ─── TOAST ─── -->
@@ -1479,12 +813,11 @@
         }
         document.getElementById('emailInput').style.borderColor = '';
         document.getElementById('emailInput').value = '';
-        showToast('¡Suscrito correctamente! Gracias.');
+        showToast('¡Suscrito! Bienvenido a la comunidad maker.');
     }
 
-    // Countdown timer
     function startCountdown() {
-        let h = 8, m = 24, s = 0;
+        let h = 3, m = 47, s = 0;
         setInterval(() => {
             s--;
             if (s < 0) { s = 59; m--; }
